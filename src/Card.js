@@ -1,6 +1,6 @@
 import {default as View} from './CardView.js';
 import TaskQueue from './TaskQueue.js';
-import {getCreatureDescription} from './index'
+import {getCreatureDescription} from './index.js'
 
 const Card = function () {
     function Card(name, maxPower, image) {
