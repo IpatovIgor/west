@@ -27,32 +27,36 @@ export function getCreatureDescription(card) {
     return 'Существо';
 }
 
+class Duck extends Card {
+    constructor(name = "Мирная утка", level = 2, image = 'bandit.png') {
+        super(name, level, image);
+    }
 
+    quacks() {
+        console.log("Кря! Мирная утка крякает");
+    }
 
-// Основа для утки.
-function Duck() {
-    this.quacks = function () { console.log('quack') };
-    this.swims = function () { console.log('float: both;') };
+    swims() {
+        console.log("Плывет как утка");
+    }
 }
 
-
-// Основа для собаки.
-function Dog() {
+class Dog extends Card {
+    constructor(name = "Пес-бандит", level = 3, image = 'bandit.png') {
+        super(name, level, image);
+    }
 }
 
-
-// Колода Шерифа, нижнего игрока.
+// Замена карт в колодах
 const seriffStartDeck = [
-    new Card('Мирный житель', 2),
-    new Card('Мирный житель', 2),
-    new Card('Мирный житель', 2),
+    new Duck('Мирная утка', 2),
+    new Duck('Мирная утка', 2),
+    new Duck('Мирная утка', 2),
 ];
 
-// Колода Бандита, верхнего игрока.
 const banditStartDeck = [
-    new Card('Бандит', 3),
+    new Dog('Пес-бандит', 3),
 ];
-
 
 // Создание игры.
 const game = new Game(seriffStartDeck, banditStartDeck);
