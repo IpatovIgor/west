@@ -1,5 +1,6 @@
 import Card from './Card.js';
 import Game from './Game.js';
+import Creature from './Card.js';
 import TaskQueue from './TaskQueue.js';
 import SpeedRate from './SpeedRate.js';
 
@@ -27,7 +28,7 @@ export function getCreatureDescription(card) {
     return 'Существо';
 }
 
-class Duck extends Card {
+class Duck extends Creature {
     constructor(name = "Мирная утка", level = 2, image = 'bandit.png') {
         super(name, level, image);
     }
@@ -41,21 +42,37 @@ class Duck extends Card {
     }
 }
 
-class Dog extends Card {
+class Dog extends Creature {
     constructor(name = "Пес-бандит", level = 3, image = 'bandit.png') {
         super(name, level, image);
     }
 }
 
+class Trasher extends Dog {
+    constructor(name = "Громила", level = 5, image = 'bandit.png') {
+        super(name, level, image);
+    }
+
+    modifyTakenDamage(value, fromCard, gameContext, continuation) {
+        this.view.signalAbility(() => {continuation(value-1)});
+    }
+
+    getDescriptions() {
+        let result = super.getDescriptions();
+        result.push('урон уменьшается на 1')
+        return result;
+    }
+}
+
 // Замена карт в колодах
 const seriffStartDeck = [
-    new Duck('Мирная утка', 2),
-    new Duck('Мирная утка', 2),
-    new Duck('Мирная утка', 2),
+    new Duck(),
+    new Duck(),
+    new Duck(),
+    new Duck(),
 ];
-
 const banditStartDeck = [
-    new Dog('Пес-бандит', 3),
+    new Trasher(),
 ];
 
 // Создание игры.
