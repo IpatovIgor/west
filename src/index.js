@@ -14,7 +14,7 @@ function isDog(card) {
 }
 
 // Дает описание существа по схожести с утками и собаками
-function getCreatureDescription(card) {
+export function getCreatureDescription(card) {
     if (isDuck(card) && isDog(card)) {
         return 'Утка-Собака';
     }
